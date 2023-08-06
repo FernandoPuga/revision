@@ -6,8 +6,8 @@ from .models import *
 
 from django.views.generic import ListView
 from django.views.generic import CreateView
-from django.views.generic import UpdateView
 from django.views.generic import DetailView
+from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 
 
@@ -29,5 +29,7 @@ class CarpinteroList(ListView):
 class CarpinteroCreate(CreateView):
     model = Carpinteros
     fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
-    succes_url = reverse_lazy('carpinteros')
+    success_url = reverse_lazy('carpinteros')
  
+class CarpinteroDetail(DetailView):
+    model = Carpinteros

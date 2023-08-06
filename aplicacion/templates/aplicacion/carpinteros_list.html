@@ -47,6 +47,12 @@
         <td>{{carpintero.localidad}}</td>
         <td>
             <a
+            href="{% url 'detail_carpintero' p.id %}"
+            class="btn btn-info"
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+            ><i class="fa fa-search fa-sm" title="View Record"></i>
+            </a>
+            <a
               href="#"
               class="btn btn-primary"
               style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
