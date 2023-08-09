@@ -54,7 +54,7 @@ class CarpinteroDelete(LoginRequiredMixin, DeleteView):
 # _______________________________________________________________carpinteros busqueda por zona
 
 def buscarCarpinterosZona(request):
-    return render(request, "aplicacion/carpinteros_list.html")
+    return render(request, "carpinteros_list.html")
 
 def buscar2(request):
     if request.GET['zona']:
@@ -62,9 +62,7 @@ def buscar2(request):
         localidad = Carpinteros.objects.filter(localidad__icontains=zona)
         return render(request,
                      "aplicacion/resultadosZona.html",
-                     {"zona":zona, "localidad":localidad})
-
-
+                     {"zona":zona, "carpinteros_list":localidad})
 
 
 # ________________________________________________________calss_views_electricistas
