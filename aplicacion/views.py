@@ -17,37 +17,55 @@ from django.views.generic import DeleteView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
+# __________________________Mixins y Decorators
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def index(request):
     return render(request , 'aplicacion/base.html')
 
-def carpinteros(request):
-    ctx = {"carpinteros" : Carpinteros.objects.all()}
-    return render(request , 'aplicacion/carpinteros.html', ctx)
+
 
 # _______________________________________________________________class_views_carpinteros
 
-class CarpinteroList(ListView):
+class CarpinteroList(LoginRequiredMixin, ListView):
     model = Carpinteros
 
-class CarpinteroCreate(CreateView):
+class CarpinteroCreate(LoginRequiredMixin, CreateView):
     model = Carpinteros
     fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
     success_url = reverse_lazy('carpinteros')
  
-class CarpinteroDetail(DetailView):
+class CarpinteroDetail(LoginRequiredMixin, DetailView):
     model = Carpinteros
 
-class CarpinteroUpdate(UpdateView):
+class CarpinteroUpdate(LoginRequiredMixin, UpdateView):
     model = Carpinteros
     fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
     success_url = reverse_lazy('carpinteros')
 
-class CarpinteroDelete(DeleteView):
+class CarpinteroDelete(LoginRequiredMixin, DeleteView):
     model = Carpinteros
     success_url = reverse_lazy('carpinteros')
+
+# _______________________________________________________________carpinteros busqueda por zona
+
+def buscarCarpinterosZona(request):
+    return render(request, "aplicacion/carpinteros_list.html")
+
+def buscar2(request):
+    if request.GET['zona']:
+        zona = request.GET['zona']
+        localidad = Carpinteros.objects.filter(localidad__icontains=zona)
+        return render(request,
+                     "aplicacion/resultadosZona.html",
+                     {"zona":zona, "localidad":localidad})
+
+
+
 
 # ________________________________________________________calss_views_electricistas
 
@@ -73,7 +91,6 @@ class ElectricistasDelete(DeleteView):
 
 
 # _________________________login
-
 def login_request(request):
     if request.method == "POST":
         miForm = AuthenticationForm(request, data=request.POST)
@@ -83,9 +100,9 @@ def login_request(request):
             user = authenticate(username=usuario, password=clave)
             if user is not None:
                 login(request, user)
-                return render(request, 'aplicacion/base.html', {"mensaje":f"Bienvenido {usuario}"})
+                return render(request, 'aplicacion/base.html', {"mensaje":f"Bienvenido/a {usuario}"})
             else:
-                return render(request, 'aplicacion/login.html', {"mensaje":f"Datos invalidos"})
+                return render(request, 'aplicacion/login.html', {"form":miForm, "mensaje":f"Datos invalidos"})
         else:
             return render(request, 'aplicacion/login.html', { "form":miForm, "mensaje":f"Datos invalidos"})
     miForm = AuthenticationForm()
@@ -94,14 +111,13 @@ def login_request(request):
     
 
 # _________________________register
-
 def register(request):
     if request.method == 'POST':
         form = RegistroUsuariosForm(request.POST) # UserCreationForm 
         if form.is_valid():  # Si pasó la validación de Django
             usuario = form.cleaned_data.get('username')
             form.save()
-            return render(request, "aplicacion/base.html", {"mensaje":"Usuario Creado"})        
+            return render(request, "aplicacion/base.html", {"mensaje":"Gracias por Registrarte"})        
     else:
         form = RegistroUsuariosForm() # UserCreationForm 
 

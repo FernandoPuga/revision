@@ -23,13 +23,18 @@ urlpatterns = [
     path('update_electricista/<int:pk>/',ElectricistasUpdate.as_view(), name='update_electricista' ),
     path('delete_electricista/<int:pk>/',ElectricistasDelete.as_view(), name='delete_electricista' ),
 
+#_________________________busqueda
+
+    path('carpinteros_list/', buscarCarpinterosZona, name='carpinteros_list'),
+    path('carpinteros/buscar2/', buscar2, name='carpinteros/buscar2'),
+
 
 # _________________________login
 
     path('login/',login_request, name='login' ),
     path('logout/',LogoutView.as_view(template_name="aplicacion/logout.html"), name='logout' ),
 
-# _________________________login
+# _________________________Registro
 
     path('register/', register, name="register"),
 

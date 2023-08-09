@@ -1,22 +1,34 @@
+
 {% extends 'aplicacion/base.html' %} 
 {% load static %} 
 {% block titulo %}Login{% endblock titulo %} 
-{% block cabecera %}Login {% endblock cabecera %} 
+{% block cabecera %}<br>
+ {% endblock cabecera %} 
 {% block contenido %}
-    <br>
-    {% if mensaje %}
-    <h4>
-        <p style="color:red" align="center">
-        {{ mensaje }}
-        </p>
-    </h4>
-    {% endif %}
+    <div style="display: flex; justify-content: center; align-items: center; height: 20vh;">
+        <div>
+            <br>
+            <br>
+            <br>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <br>
+                <div class="d-grid gap-2">
+                    <input type="submit" class="btn btn-primary" value="Iniciar sesion">
+                </div>
+            </form>
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        <table>
-        {{ form.as_table }}
-        </table>
-        <button type="submit">Iniciar Sesión</button>
-    </form>
+            <br><br>
+            
+            {% if not usuario_registrado %}
+            <p style="text-align: center;">¿No estás registrado?</p>
+            <div style="text-align: center;">
+                <a href="{% url 'register' %}" class="register-button">Registrarse</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock contenido %}

@@ -1,14 +1,24 @@
 {% extends 'aplicacion/base.html' %} 
 {% load static %} 
 {% block titulo %}Registro{% endblock titulo %} 
-{% block cabecera %}Registro{% endblock cabecera %} 
+{% block cabecera %}<br>
+{% endblock cabecera %} 
 {% block contenido %}
-    <br>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <table>
-        {{ form.as_table }}
-        </table>
-        <button type="submit">Crear Usuario</button>
-    </form>
+    <div style="display: flex; justify-content: center; align-items: center; height: 20vh;">
+        <div>
+            <br>
+            <p style="text-align: center;">Por favor completa tus datos para crear un usuario</p>
+            <br>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <table style="margin: 0 auto;">
+                    {{ form.as_table }}
+                </table>
+                <br>
+                <div class="d-grid gap-2">
+                    <input type="submit" class="btn btn-primary" value="Iniciar sesion">
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock contenido %}
