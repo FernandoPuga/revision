@@ -9,6 +9,7 @@ class Carpinteros(models.Model):
     email = models.EmailField()
     telefono = models.IntegerField()
     localidad = models.CharField(max_length=50)
+    precio = models.CharField(max_length=50)
     
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
@@ -21,6 +22,10 @@ class Electricistas(models.Model):
     email = models.EmailField()
     telefono = models.IntegerField()
     localidad = models.CharField(max_length=50)
+    categoria = models.CharField(max_length=50)
+    matricula = models.CharField(max_length=50)
+    precio = models.CharField(max_length=50)
+ 
     
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
@@ -32,6 +37,9 @@ class Plomeros(models.Model):
     email = models.EmailField()
     telefono = models.IntegerField()
     localidad = models.CharField(max_length=50)
+    categoria = models.CharField(max_length=50)
+    matricula = models.CharField(max_length=50)
+    precio = models.CharField(max_length=50)
     
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
@@ -43,6 +51,9 @@ class Gasistas(models.Model):
     email = models.EmailField()
     telefono = models.IntegerField()
     localidad = models.CharField(max_length=50)
+    categoria = models.CharField(max_length=50)
+    matricula = models.CharField(max_length=50)
+    precio = models.CharField(max_length=50)
     
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
@@ -54,6 +65,7 @@ class Pintores(models.Model):
     email = models.EmailField()
     telefono = models.IntegerField()
     localidad = models.CharField(max_length=50)
+    precio = models.CharField(max_length=50)
     
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
