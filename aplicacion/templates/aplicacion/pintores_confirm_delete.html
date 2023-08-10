@@ -1,0 +1,21 @@
+{% extends 'aplicacion/base.html' %} 
+{% load static %} 
+{% block titulo %}Pintores{% endblock titulo %} 
+{% block cabecera %} {% endblock cabecera %} 
+{% block contenido %}
+    
+    <form action="" method="POST">
+        <form action="" method="POST">
+            {% csrf_token %}   
+            <div class="text-center">     
+                <h3>¿Está seguro de eliminar al pintor? <p style="color:black">{{ object }}</p></h3>
+            </div>
+            <div class="text-center">
+                <input type="submit" class="btn btn-danger btn-block confirmar-btn" value="Confirmar">
+                <a href="{% url 'pintores' %}" class="btn btn-primary btn-block">
+                    <i class="fa fa-share fa-sm" title="List Back"></i> Volver
+                </a>
+            </div>
+        </form>
+    </form>
+{% endblock contenido %}

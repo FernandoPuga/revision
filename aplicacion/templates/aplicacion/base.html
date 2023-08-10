@@ -33,6 +33,10 @@
                 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
                 <a class="navbar-brand" href="{% url 'carpinteros' %}">Carpinteros</a>
                 <a class="navbar-brand" href="{% url 'electricistas' %}">Electricistas</a>
+                <a class="navbar-brand" href="{% url 'plomeros' %}">Plomeros</a>
+                <a class="navbar-brand" href="{% url 'gasistas' %}">Gasistas</a>
+                <a class="navbar-brand" href="{% url 'pintores' %}">Pintores</a>
+                <a class="navbar-brand" href="{% url 'acercaDeMi' %}">Info</a>
                 <a class="navbar-brand btn btn-success admin-button" href="{% url 'admin:index' %}">Admin</a>            
                 <div class="navbar-text" style="text-align: center;">
                     <p style="color: red; font-size: 15px;">Bienvenido/a {{ user.username|upper }}</p>
@@ -69,6 +73,7 @@
             </p>
         </h4>
         {% endif %}
+
         {% block contenido %}      
 
         {% endblock contenido %}

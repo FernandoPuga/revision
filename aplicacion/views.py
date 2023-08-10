@@ -68,27 +68,163 @@ def buscar2(request):
                      {"zona":zona, "carpinteros_list":localidad})
 
 
-# ________________________________________________________calss_views_electricistas
+# ________________________________________________________class_views_electricistas
 
-class ElectricistasList(ListView):
+class ElectricistasList(LoginRequiredMixin, ListView):
     model = Electricistas
 
-class ElectricistasCreate(CreateView):
+class ElectricistasCreate(LoginRequiredMixin, CreateView):
     model = Electricistas
     fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
     success_url = reverse_lazy('electricistas')
  
-class ElectricistasDetail(DetailView):
+class ElectricistasDetail(LoginRequiredMixin, DetailView):
     model = Electricistas
 
-class ElectricistasUpdate(UpdateView):
+class ElectricistasUpdate(LoginRequiredMixin, UpdateView):
     model = Electricistas
     fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
     success_url = reverse_lazy('electricistas')
 
-class ElectricistasDelete(DeleteView):
+class ElectricistasDelete(LoginRequiredMixin, DeleteView):
     model = Electricistas
     success_url = reverse_lazy('electricistas')
+
+# _______________________________________________________________electricistas busqueda por zona
+@ login_required
+def buscarElectricistasZona(request):
+    return render(request, "electricistas_list.html")
+
+@ login_required
+def buscar3(request):
+    zona = request.GET['zona']
+    if zona:
+        localidad = Electricistas.objects.filter(localidad=zona)
+    else:
+        localidad = Electricistas.objects.all()
+    return render(request,
+                     "aplicacion/electricistas_list.html",
+                     {"zona":zona, "electricistas_list":localidad})
+
+
+# ________________________________________________________class_views_plomeros
+
+class PlomerosList(LoginRequiredMixin, ListView):
+    model = Plomeros
+
+class PlomerosCreate(LoginRequiredMixin, CreateView):
+    model = Plomeros
+    fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
+    success_url = reverse_lazy('plomeros')
+ 
+class PlomerosDetail(LoginRequiredMixin, DetailView):
+    model = Plomeros
+
+class PlomerosUpdate(LoginRequiredMixin, UpdateView):
+    model = Plomeros
+    fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
+    success_url = reverse_lazy('plomeros')
+
+class PlomerosDelete(LoginRequiredMixin, DeleteView):
+    model = Plomeros
+    success_url = reverse_lazy('plomeros')
+
+# _______________________________________________________________plomeros busqueda por zona
+@ login_required
+def buscarPlomerosZona(request):
+    return render(request, "plomeros_list.html")
+
+@ login_required
+def buscar4(request):
+    zona = request.GET['zona']
+    if zona:
+        localidad = Plomeros.objects.filter(localidad=zona)
+    else:
+        localidad = Plomeros.objects.all()
+    return render(request,
+                     "aplicacion/plomeros_list.html",
+                     {"zona":zona, "plomeros_list":localidad})
+
+
+# ________________________________________________________class_views_gasistas
+
+class GasistasList(LoginRequiredMixin, ListView):
+    model = Gasistas
+
+class GasistasCreate(LoginRequiredMixin, CreateView):
+    model = Gasistas
+    fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
+    success_url = reverse_lazy('gasistas')
+ 
+class GasistasDetail(LoginRequiredMixin, DetailView):
+    model = Gasistas
+
+class GasistasUpdate(LoginRequiredMixin, UpdateView):
+    model = Gasistas
+    fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
+    success_url = reverse_lazy('gasistas')
+
+class GasistasDelete(LoginRequiredMixin, DeleteView):
+    model = Gasistas
+    success_url = reverse_lazy('gasistas')
+
+# _______________________________________________________________gasistas busqueda por zona
+@ login_required
+def buscarGasistasZona(request):
+    return render(request, "gasistas_list.html")
+
+@ login_required
+def buscar5(request):
+    zona = request.GET['zona']
+    if zona:
+        localidad = Gasistas.objects.filter(localidad=zona)
+    else:
+        localidad = Gasistas.objects.all()
+    return render(request,
+                     "aplicacion/gasistas_list.html",
+                     {"zona":zona, "gasistas_list":localidad})
+
+
+# ________________________________________________________class_views_pintores
+
+class PintoresList(LoginRequiredMixin, ListView):
+    model = Pintores
+
+class PintoresCreate(LoginRequiredMixin, CreateView):
+    model = Pintores
+    fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
+    success_url = reverse_lazy('pintores')
+ 
+class PintoresDetail(LoginRequiredMixin, DetailView):
+    model = Pintores
+
+class PintoresUpdate(LoginRequiredMixin, UpdateView):
+    model = Pintores
+    fields = ['nombre', 'apellido', 'email', 'telefono', 'localidad']
+    success_url = reverse_lazy('pintores')
+
+class PintoresDelete(LoginRequiredMixin, DeleteView):
+    model = Pintores
+    success_url = reverse_lazy('pintores')
+
+# _______________________________________________________________pintores busqueda por zona
+@ login_required
+def buscarPintoresZona(request):
+    return render(request, "pintores_list.html")
+
+@ login_required
+def buscar6(request):
+    zona = request.GET['zona']
+    if zona:
+        localidad = Pintores.objects.filter(localidad=zona)
+    else:
+        localidad = Pintores.objects.all()
+    return render(request,
+                     "aplicacion/pintores_list.html",
+                     {"zona":zona, "pintores_list":localidad})
+
+
+
 
 
 # _________________________login
@@ -123,5 +259,12 @@ def register(request):
         form = RegistroUsuariosForm() # UserCreationForm 
 
     return render(request, "aplicacion/registro.html", {"form": form})    
+
+
+
+# ____________________________________________acerca de mi
+
+def acercaDeMi(request):
+    return render(request, 'aplicacion/acercaDeMi.html', {})
 
 
