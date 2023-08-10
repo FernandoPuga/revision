@@ -52,16 +52,19 @@ class CarpinteroDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('carpinteros')
 
 # _______________________________________________________________carpinteros busqueda por zona
-
+@ login_required
 def buscarCarpinterosZona(request):
     return render(request, "carpinteros_list.html")
 
+@ login_required
 def buscar2(request):
-    if request.GET['zona']:
-        zona = request.GET['zona']
-        localidad = Carpinteros.objects.filter(localidad__icontains=zona)
-        return render(request,
-                     "aplicacion/resultadosZona.html",
+    zona = request.GET['zona']
+    if zona:
+        localidad = Carpinteros.objects.filter(localidad=zona)
+    else:
+        localidad = Carpinteros.objects.all()
+    return render(request,
+                     "aplicacion/carpinteros_list.html",
                      {"zona":zona, "carpinteros_list":localidad})
 
 
