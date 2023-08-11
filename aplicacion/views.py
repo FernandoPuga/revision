@@ -250,21 +250,42 @@ def login_request(request):
 # ________________________________________________________________________register
 def register(request):
     if request.method == 'POST':
-        form = RegistroUsuariosForm(request.POST) # UserCreationForm 
-        if form.is_valid():  # Si pasó la validación de Django
+        form = RegistroUsuariosForm(request.POST) 
+        if form.is_valid(): 
             usuario = form.cleaned_data.get('username')
             form.save()
             return render(request, "aplicacion/base.html", {"mensaje":"Gracias por Registrarte"})        
     else:
-        form = RegistroUsuariosForm() # UserCreationForm 
+        form = RegistroUsuariosForm() 
 
     return render(request, "aplicacion/registro.html", {"form": form})    
 
 
 
 # ______________________________________________________________________acerca de mi
-
+@ login_required
 def acercaDeMi(request):
     return render(request, 'aplicacion/acercaDeMi.html', {})
+
+# ______________________________________________________________________Editar registro
+
+@login_required
+def editarRegistro(request):
+    usuario = request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            usuario.email = form.cleaned_data.get('email')
+            usuario.password1 = form.cleaned_data.get('password1')
+            usuario.password2 = form.cleaned_data.get('password2')
+            usuario.save()
+            return render(request, "aplicacion/base.html", {'mensaje': f"Usuario {usuario.username} actualizado correctamente"})
+        else:
+            return render(request, "aplicacion/editarRegistro.html", {'form': form})
+    else:
+        form = UserEditForm(instance=usuario)
+    return render(request, "aplicacion/editarRegistro.html", {'form': form, 'usuario':usuario.username})
+        
+
 
 

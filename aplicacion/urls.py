@@ -92,5 +92,9 @@ urlpatterns = [
 
     path('acercaDeMi/', acercaDeMi, name="acercaDeMi"),
 
+# _________________________acerca de mi
+
+    path('editar_registro/', editarRegistro, name="editar_registro"),
+
 
 ]

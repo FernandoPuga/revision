@@ -1,0 +1,21 @@
+{% extends 'aplicacion/base.html' %} 
+{% load static %} 
+{% block titulo %}Editar registro{% endblock titulo %} 
+{% block cabecera %} {% endblock cabecera %} 
+{% block contenido %}
+<div style="display: flex; justify-content: center; align-items: center; height: 40vh;">
+    <div>
+        <h2 class="text-center">Editar Registro</h2>
+        <form action="" method="POST">
+            {% csrf_token %} 
+            <table>
+                {{ form.as_table }}
+            </table>
+            <br>
+            <div class="d-grid gap-2">
+                <input type="submit" class="btn btn-primary" value="Actualizar Usuario">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock contenido %}
