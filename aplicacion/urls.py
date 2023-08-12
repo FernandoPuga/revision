@@ -92,9 +92,13 @@ urlpatterns = [
 
     path('acercaDeMi/', acercaDeMi, name="acercaDeMi"),
 
-# _________________________acerca de mi
+# _________________________editar registro
 
     path('editar_registro/', editarRegistro, name="editar_registro"),
+
+# _________________________Imagen Avatar
+
+    path('imagen_avatar/', imagenAvatar, name="imagen_avatar"),
 
 
 ]

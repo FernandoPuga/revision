@@ -38,10 +38,14 @@
                 <a class="navbar-brand" href="{% url 'plomeros' %}">Plomeros</a>
                 <a class="navbar-brand" href="{% url 'gasistas' %}">Gasistas</a>
                 <a class="navbar-brand" href="{% url 'pintores' %}">Pintores</a>
-                <a class="navbar-brand" href="{% url 'acercaDeMi' %}">Info</a>
-                <a class="navbar-brand" href="{% url 'admin:index' %}">Admin</a>            
+                <a class="navbar-brand" href="{% url 'acercaDeMi' %}">INFO</a>
+                <a class="navbar-brand" href="{% url 'admin:index' %}">Admin</a>
+                <a class="navbar-brand" href="{% url 'editar_registro' %}">Editar Usuario</a>
                 <div class="navbar-text" style="text-align: center;">
-                    <p style="color: red; font-size: 15px;">Bienvenido/a {{ user.username|upper }}</p>
+                    <p style="color: blue; font-size: 20px;">Bienvenido/a {{ user.username|upper }}</p>
+                    <div class="text-center">
+                        <img src="{{ request.session.avatar }}" class="rounded-circle mb-1" width="60px"/>
+                    </div>
                 </div>
                 <a class="navbar-brand btn btn-primary" href="{% url 'logout' %}">Logout</a>
                 {% else %}

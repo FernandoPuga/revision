@@ -8,6 +8,7 @@
         <h2 class="text-center">Editar Registro</h2>
         <form action="" method="POST">
             {% csrf_token %} 
+            <br>
             <table>
                 {{ form.as_table }}
             </table>

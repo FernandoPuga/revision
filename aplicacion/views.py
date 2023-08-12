@@ -247,7 +247,8 @@ def login_request(request):
     return render(request, "aplicacion/login.html", {"form":miForm})
     
 
-# ________________________________________________________________________register
+# ________________________________________________________________________registro
+
 def register(request):
     if request.method == 'POST':
         form = RegistroUsuariosForm(request.POST) 
@@ -275,10 +276,13 @@ def editarRegistro(request):
     if request.method == "POST":
         form = UserEditForm(request.POST)
         if form.is_valid():
-            usuario.email = form.cleaned_data.get('email')
-            usuario.password1 = form.cleaned_data.get('password1')
-            usuario.password2 = form.cleaned_data.get('password2')
+            nuevo_email = form.cleaned_data.get('email')
+            nueva_contraseña = form.cleaned_data.get('password1')  
+
+            usuario.email = nuevo_email
+            usuario.set_password(nueva_contraseña)
             usuario.save()
+
             return render(request, "aplicacion/base.html", {'mensaje': f"Usuario {usuario.username} actualizado correctamente"})
         else:
             return render(request, "aplicacion/editarRegistro.html", {'form': form})
@@ -286,6 +290,30 @@ def editarRegistro(request):
         form = UserEditForm(instance=usuario)
     return render(request, "aplicacion/editarRegistro.html", {'form': form, 'usuario':usuario.username})
         
+# ______________________________________________________________________avatares
 
+@login_required
+def imagenAvatar(request):
+    if request.method == "POST":
+        form = AvatarFormulario(request.POST, request.FILES)
+        if form.is_valid():
+            u = User.objects.get(username=request.user)
+            #_________________ Esto es para borrar el avatar anterior
+            avatarViejo = Avatar.objects.filter(user=u)
+            if len(avatarViejo) > 0: # Si esto es verdad quiere decir que hay un Avatar previo
+                avatarViejo[0].delete()
+
+            #_________________ Grabo avatar nuevo
+            avatar = Avatar(user=u, imagen=form.cleaned_data['imagen'])
+            avatar.save()
+
+            #_________________ Almacenar en session la url del avatar para mostrarla en base
+            imagen = Avatar.objects.get(user=request.user.id).imagen.url
+            request.session['avatar'] = imagen
+
+            return render(request, "aplicacion/base.html")
+    else:
+        form = AvatarFormulario()
+    return render(request, "aplicacion/imagenAvatar.html", {'form': form})
 
 
