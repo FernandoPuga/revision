@@ -44,7 +44,7 @@
                 <div class="navbar-text" style="text-align: center;">
                     <p style="color: blue; font-size: 20px;">Bienvenido/a {{ user.username|upper }}</p>
                     <div class="text-center">
-                        <img src="{{ request.session.avatar }}" class="rounded-circle mb-1" width="60px"/>
+                        <img src="{{ request.session.avatar }}" class="rounded-circle mb-1" width="40px"/>
                     </div>
                 </div>
                 <a class="navbar-brand btn btn-primary" href="{% url 'logout' %}">Logout</a>
