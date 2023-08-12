@@ -10,11 +10,10 @@ Profesionales para la remodelacion del hogar
 1.0
 
 ## Descripción del Proyecto
+
 Página Web de distintos tipos de profesionales para relaizar los proyectos del hogar entre otros.
 
-Para poder hacer uso de la pagina el usuario debera registrarse y loguearse, una vez echo esto, se podra interactuar con las distintas profesiones, se podra editar su perfil y elegir el Avatar que desee.
-
-A fin de navegar por las secciones de la página web, el usuario será requerido iniciar sesión o registrarse en caso de no contar con usuario o contraseña. En ambas opciones, una vez la página valide la autenticación del usuario, este será redirigido al inicio de la página web.
+Para poder hacer uso de la pagina web el usuario debera registrarse y loguearse, una vez echo esto, se podra interactuar con las distintas profesiones, se podra editar su perfil y elegir el Avatar que desee.
 
 Los usuarios pueden realizar las siguientes accciones:
 
