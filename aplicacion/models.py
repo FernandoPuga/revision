@@ -70,9 +70,10 @@ class Pintores(models.Model):
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
     
+    
 class Avatar(models.Model):
     imagen = models.ImageField(upload_to="avatares")
-    user = models.ForeignKey(User, on_delete= models.CASCADE)
+    user = models.OneToOneField(User, on_delete= models.CASCADE)
 
     def __str__(self):
         return f"{self.user} [{self.imagen}]"

@@ -269,7 +269,7 @@ def acercaDeMi(request):
     return render(request, 'aplicacion/acercaDeMi.html', {})
 
 # ______________________________________________________________________Editar registro
-
+@ login_required
 def editarRegistro(request):
     usuario = request.user
     if request.method == "POST":
@@ -282,7 +282,6 @@ def editarRegistro(request):
             usuario.set_password(nueva_contraseña)
             usuario.save()
 
-            # Reauthenticate user with new password
             user = authenticate(username=usuario.username, password=nueva_contraseña)
             if user is not None:
                 login(request, user)
@@ -292,7 +291,7 @@ def editarRegistro(request):
         form = UserEditForm(instance=usuario)
     return render(request, "aplicacion/editarRegistro.html", {'form': form, 'usuario': usuario.username})
         
-# ______________________________________________________________________avatares
+# ______________________________________________________________________avatar
 
 @login_required
 def imagenAvatar(request):
@@ -300,16 +299,11 @@ def imagenAvatar(request):
         form = AvatarFormulario(request.POST, request.FILES)
         if form.is_valid():
             u = User.objects.get(username=request.user)
-            #_________________ Esto es para borrar el avatar anterior
             avatarViejo = Avatar.objects.filter(user=u)
-            if len(avatarViejo) > 0: # Si esto es verdad quiere decir que hay un Avatar previo
+            if len(avatarViejo) > 0: 
                 avatarViejo[0].delete()
-
-            #_________________ Grabo avatar nuevo
             avatar = Avatar(user=u, imagen=form.cleaned_data['imagen'])
             avatar.save()
-
-            #_________________ Almacenar en session la url del avatar para mostrarla en base
             imagen = Avatar.objects.get(user=request.user.id).imagen.url
             request.session['avatar'] = imagen
 

@@ -40,12 +40,12 @@
                 <a class="navbar-brand" href="{% url 'pintores' %}">Pintores</a>
                 <a class="navbar-brand" href="{% url 'acercaDeMi' %}">INFO</a>
                 <a class="navbar-brand" href="{% url 'admin:index' %}">Admin</a>
-                <a class="navbar-brand" href="{% url 'editar_registro' %}">Editar Usuario</a>
-                <a class="navbar-brand" href="{% url 'imagen_avatar' %}">Seleccionar Avatar</a>
+                <a class="navbar-brand" href="{% url 'editar_registro' %}" style="color: orange;">Editar Usuario</a>
+                <a class="navbar-brand" href="{% url 'imagen_avatar' %}" style="color: orange;">Seleccionar Avatar</a>
                 <div class="navbar-text" style="text-align: center;">
                     <p style="color: blue; font-size: 20px;">Bienvenido/a {{ user.username|upper }}</p>
                     <div class="text-center">
-                        <img src="{{ request.session.avatar }}" class="rounded-circle mb-1" width="40px"/>
+                        <img src="{{ user.avatar.imagen.url }}" class="rounded-circle mb-1" width="30px"/>
                     </div>
                 </div>
                 <a class="navbar-brand btn btn-primary" href="{% url 'logout' %}">Logout</a>
