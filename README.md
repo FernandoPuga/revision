@@ -45,3 +45,10 @@ Ver archivo titulado "Prueba Proyecto_ final Python.xlsx"
 
 https://youtu.be/O3tgo0Txl9Q
 
+
+## SUPERUSER
+
+USUARIO : fernando
+ACONTRASEÑA : 123456
+
+
