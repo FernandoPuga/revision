@@ -270,25 +270,27 @@ def acercaDeMi(request):
 
 # ______________________________________________________________________Editar registro
 
-@login_required
 def editarRegistro(request):
     usuario = request.user
     if request.method == "POST":
-        form = UserEditForm(request.POST)
+        form = UserEditForm(request.POST, instance=usuario)
         if form.is_valid():
             nuevo_email = form.cleaned_data.get('email')
-            nueva_contraseña = form.cleaned_data.get('password1')  
+            nueva_contraseña = form.cleaned_data.get('password1')
 
             usuario.email = nuevo_email
             usuario.set_password(nueva_contraseña)
             usuario.save()
 
+            # Reauthenticate user with new password
+            user = authenticate(username=usuario.username, password=nueva_contraseña)
+            if user is not None:
+                login(request, user)
+
             return render(request, "aplicacion/base.html", {'mensaje': f"Usuario {usuario.username} actualizado correctamente"})
-        else:
-            return render(request, "aplicacion/editarRegistro.html", {'form': form})
     else:
         form = UserEditForm(instance=usuario)
-    return render(request, "aplicacion/editarRegistro.html", {'form': form, 'usuario':usuario.username})
+    return render(request, "aplicacion/editarRegistro.html", {'form': form, 'usuario': usuario.username})
         
 # ______________________________________________________________________avatares
 
